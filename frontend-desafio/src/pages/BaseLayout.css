@@ -1,0 +1,281 @@
+.main {
+    min-height: 100vh;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container Principal */
+.content-container {
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    align-items: center;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    min-height: 600px !important;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Título da Página */
+.page-title {
+    color: rgb(172, 193, 204);
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 8px solid rgb(237, 20, 91);
+    padding-bottom: 10px;
+    display: block;
+    width: 100%;
+}
+
+/* Cabeçalho de Seção */
+.section-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Logo FIAP */
+.fiap-logo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.fiap-logo:hover {
+    opacity: 1;
+}
+
+/* Busca */
+.search-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #e91c5d;
+    border-radius: 8px;
+    outline: none;
+    width: 280px;
+    height: 25px;
+    max-width: 100%;
+    transition: 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #c0174b;
+    box-shadow: 0 0 0 3px rgba(233, 28, 93, 0.2);
+}
+
+.search-button {
+    background-color: #e91c5d;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-button:hover {
+    background-color: #c0174b;
+    transform: scale(1.02);
+}
+
+/* Mensagens */
+.loading-message,
+.empty-message {
+    text-align: center;
+    font-size: 18px;
+    color: #ccc;
+}
+
+/* Tabela */
+.data-table {
+    width: 100%;
+    max-width: 1000px;
+    min-width: 1000px;
+    border-collapse: collapse;
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    color: rgb(148, 155, 153);
+}
+
+.data-table th {
+    background-color: #E91C5D;
+    color: #acc1cc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+.data-table tr:hover {
+    background-color: #333;
+    transition: background 0.3s;
+}
+
+/* Botões Gerais */
+.btn-edit,
+.btn-delete {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    color: rgb(97, 109, 114);
+}
+
+.btn-edit {
+    background-color: transparent;
+    border: 1px solid rgb(166, 186, 198);
+    font-weight: 500;
+}
+
+.btn-delete {
+    background-color: transparent;
+    border: 1px solid rgb(166, 186, 198);
+    font-weight: 500;
+}
+
+.btn-delete:hover {
+    background: #b71c1c;
+    border: 1px solid #b71c1c;
+    font-weight: 500;
+}
+
+/* Botões de Ação */
+.btn-primary,
+.btn-effect {
+    width: 300px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #e91c5d;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, border 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0 8px rgba(236, 64, 122, 0.4);
+    height: 48px;
+    transition: box-shadow .2s ease, background-color .2s ease;
+}
+
+.btn-primary:hover,
+.btn-effect:hover {
+    background: #FFF;
+    color: #e91c5d;
+    box-shadow: 0 0 20px #ed145b;
+}
+
+/* Paginação */
+.paginacao {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 8px;
+}
+
+.pagina-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagina-btn:disabled {
+    background-color: #777;
+    cursor: default;
+}
+
+/* Formulário de Matrícula */
+.form-card {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.form-titulo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #75838b;
+}
+
+.form-campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.form-campo label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #616d72;
+}
+
+.form-campo select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.form-botao {
+    margin-top: 10px;
+}
+
+.feedback-sucesso {
+    margin-top: 20px;
+    color: #28a745;
+    font-weight: 500;
+}
+
+.feedback-erro {
+    margin-top: 20px;
+    color: #e53935;
+    font-weight: 500;
+}

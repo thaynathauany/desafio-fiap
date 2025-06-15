@@ -1,0 +1,14 @@
+/* index.css */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed;
+  background-image: url('../public/fundo-preto.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Montserrat', sans-serif;
+}

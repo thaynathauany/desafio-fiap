@@ -1,0 +1,28 @@
+.menu-topo {
+    background-color: #1c1c1c;
+    padding: 16px 32px;
+    color: #616d72;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #e91c5d;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu-logo img {
+    width: 80px;
+}
+
+.menu-links a {
+    margin-left: 20px;
+    color: #acc1cc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.menu-links a:hover {
+    color: #e91c5d;
+}
