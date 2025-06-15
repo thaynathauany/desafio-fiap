@@ -12,15 +12,18 @@ function AlunoFormModal({ isOpen, onClose, onSave, aluno, mensagemErro }) {
 
     useEffect(() => {
         if (aluno) {
+            const cpf = aluno.cpf.replace(/\D/g, '')
+                .replace(/^(\d{3})(\d)/, '$1.$2')
+                .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+                .replace(/\.(\d{3})(\d)/, '.$1-$2');
+
             setFormData({
                 nome: aluno.nome,
                 data_nascimento: aluno.data_nascimento,
-                cpf: aluno.cpf,
+                cpf,
                 email: aluno.email,
                 senha: '',
             });
-        } else {
-            setFormData({ nome: '', data_nascimento: '', cpf: '', email: '', senha: '' });
         }
     }, [aluno]);
 

@@ -35,7 +35,7 @@ function TurmasPage() {
             .then(res => res.json())
             .then(data => {
                 setTurmas(Array.isArray(data.data) ? data.data : []);
-                setTotal(data.total || 0); // você pode criar esse estado
+                setTotal(data.total || 0);
                 setCurrentPage(data.current_page || 1);
                 setLoading(false);
             })

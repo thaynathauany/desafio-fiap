@@ -23,9 +23,16 @@ function MatriculasPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [busca, setBusca] = useState('');
+    const [turmaSelecionada, setTurmaSelecionada] = useState('');
 
     const fetchMatriculas = (page = 1) => {
-        fetch(`http://localhost:8000/matriculas.php?page=${page}&per_page=10`)
+        const params = new URLSearchParams({
+            page: String(page),
+            per_page: '10',
+            ...(busca && { nome: busca }),
+            ...(turmaSelecionada && { turma_id: turmaSelecionada })
+        });
+        fetch(`http://localhost:8000/matriculas.php?${params.toString()}`)
             .then(res => res.json())
             .then(data => {
                 setMatriculas(Array.isArray(data.data) ? data.data : []);
@@ -77,9 +84,15 @@ function MatriculasPage() {
             });
     };
 
-    const matriculasFiltradas = matriculas.filter(m =>
-        m.aluno_nome.toLowerCase().includes(busca.toLowerCase())
-    );
+    const matriculasFiltradas = matriculas;
+
+    const formatarDataHoraBrasileira = (data) => {
+        if (!data) return '';
+        const [dataParte, horaParte] = data.split(' ');
+        const [ano, mes, dia] = dataParte.split('-');
+        const horaMinuto = horaParte?.slice(0, 5);
+        return `${dia}/${mes}/${ano} - ${horaMinuto}`;
+    };
 
     useEffect(() => {
         fetchAlunosETurmas();
@@ -96,6 +109,10 @@ function MatriculasPage() {
             return () => clearTimeout(timeout);
         }
     }, [mensagem]);
+
+    useEffect(() => {
+        fetchMatriculas();
+    }, [busca, turmaSelecionada]);
 
     return (
         <>
@@ -145,50 +162,26 @@ function MatriculasPage() {
 
                     {secao === 'tabela' && (
                         <>
-
-                            <div className="form-campo" style={{ marginBottom: '20px' }}>
+                            <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                                 <input
                                     type="text"
-                                    placeholder="Buscar por nome do aluno..."
+                                    placeholder="Buscar por nome do aluno ou turma..."
                                     value={busca}
                                     onChange={(e) => setBusca(e.target.value)}
                                     className="search-input"
-                                    style={{ width: '100%', padding: '8px', borderRadius: '5px', border: '1px solid #ccc' }}
+                                    style={{ flex: 1, padding: '8px', borderRadius: '5px', border: '1px solid #ccc' }}
                                 />
+                                <select
+                                    value={turmaSelecionada}
+                                    onChange={(e) => setTurmaSelecionada(e.target.value)}
+                                    style={{ padding: '8px', borderRadius: '5px', border: '1px solid #ccc', color: 'rgb(204, 204, 204)', fontWeight: '500' }}
+                                >
+                                    <option value="">Todas as turmas</option>
+                                    {turmas.map(t => (
+                                        <option key={t.id} value={t.id}>{t.nome}</option>
+                                    ))}
+                                </select>
                             </div>
-                            {/* <table className="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Aluno</th>
-                                        <th>Turma</th>
-                                        <th>Data da Matrícula</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {matriculas
-                                        .filter(m => m.aluno_nome.toLowerCase().includes(busca.toLowerCase()))
-                                        .map(m => (
-                                            <tr key={m.id}>
-                                                <td>{m.id}</td>
-                                                <td>{m.aluno_nome}</td>
-                                                <td>{m.turma_nome}</td>
-                                                <td>{m.data_matricula}</td>
-                                                <td>
-                                                    <button
-                                                        className="btn-delete"
-                                                        onClick={() => handleExcluir(m.id)}
-                                                    >
-                                                        Excluir
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                </tbody>
-                            </table> */}
-
-
 
                             {matriculasFiltradas.length > 0 ? (
                                 <table className="data-table">
@@ -207,7 +200,7 @@ function MatriculasPage() {
                                                 <td>{m.id}</td>
                                                 <td>{m.aluno_nome}</td>
                                                 <td>{m.turma_nome}</td>
-                                                <td>{m.data_matricula}</td>
+                                                <td>{formatarDataHoraBrasileira(m.data_matricula)}</td>
                                                 <td>
                                                     <button
                                                         className="btn-delete"

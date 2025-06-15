@@ -73,6 +73,12 @@ function AlunosPage() {
         setModalAberto(true);
     };
 
+    const formatarDataBrasileira = (data) => {
+        if (!data) return '';
+        const [ano, mes, dia] = data.split('-');
+        return `${dia}/${mes}/${ano}`;
+    };
+
     const salvarAluno = async (dados) => {
         const url = alunoEditando
             ? `http://localhost:8000/alunos.php?id=${alunoEditando.id}`
@@ -159,7 +165,7 @@ function AlunosPage() {
                                         <tr key={aluno.id}>
                                             <td>{aluno.id}</td>
                                             <td>{aluno.nome}</td>
-                                            <td>{aluno.data_nascimento}</td>
+                                            <td>{formatarDataBrasileira(aluno.data_nascimento)}</td>
                                             <td>{formatarCPF(aluno.cpf)}</td>
                                             <td>{aluno.email}</td>
                                             <td style={{ display: 'flex', gap: '8px' }}>

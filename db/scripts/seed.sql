@@ -2,10 +2,10 @@ USE `escola_db`;
 
 -- Seed Aluno 
 INSERT INTO `Aluno` (`nome`, `data_nascimento`, `cpf`, `email`, `senha`) VALUES
-('João Silva', '2000-05-15', '111.222.333-44', 'joao.silva@example.com', 'senha123'),
-('Maria Oliveira', '1999-11-20', '555.666.777-88', 'maria.oliveira@example.com', 'senha123'),
-('Pedro Souza', '2001-03-10', '999.888.777-66', 'pedro.souza@example.com', 'senha123'),
-('Ana Paula', '2002-08-25', '444.333.222-11', 'ana.paula@example.com', 'senha123');
+('João Silva', '2000-05-15', '54009546000', 'joao.silva@example.com', 'senha123'),
+('Maria Oliveira', '1999-11-20', '99195664033', 'maria.oliveira@example.com', 'senha123'),
+('Pedro Souza', '2001-03-10', '81192383036', 'pedro.souza@example.com', 'senha123'),
+('Ana Paula', '2002-08-25', '95904075014', 'ana.paula@example.com', 'senha123');
 
 -- Seed Turma 
 INSERT INTO `Turma` (`nome`, `descricao`) VALUES

@@ -122,6 +122,10 @@ function handleGetMatricula($conn)
 
     $matriculas = [];
     while ($row = $result->fetch_assoc()) {
+        if (!empty($row['data_matricula'])) {
+            $date = DateTime::createFromFormat('Y-m-d', $row['data_matricula']);
+            $row['data_matricula'] = $date ? $date->format('d/m/Y') : $row['data_matricula'];
+        }
         $matriculas[] = $row;
     }
 

@@ -37,6 +37,27 @@ switch ($method) {
 
 $conn->close();
 
+function isCpfValido($cpf)
+{
+    $cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+    if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)) {
+        return false;
+    }
+
+    for ($t = 9; $t < 11; $t++) {
+        for ($d = 0, $c = 0; $c < $t; $c++) {
+            $d += $cpf[$c] * (($t + 1) - $c);
+        }
+        $d = ((10 * $d) % 11) % 10;
+        if ($cpf[$c] != $d) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function handleGetAluno($conn)
 {
     if (isset($_GET['all']) && $_GET['all'] === 'true') {
@@ -144,6 +165,12 @@ function handlePostAluno($conn)
         return;
     }
 
+    if (!isCpfValido($cpf)) {
+        http_response_code(422);
+        echo json_encode(["message" => "O CPF informado é inválido."]);
+        return;
+    }
+
     $senha = $data['senha'];
     if (
         strlen($senha) < 8 ||
@@ -207,6 +234,12 @@ function handlePutAluno($conn)
             return;
         }
         $stmtCpf->close();
+
+        if (!isCpfValido($data['cpf'])) {
+            http_response_code(422);
+            echo json_encode(["message" => "O CPF informado é inválido."]);
+            return;
+        }
     }
 
     if (isset($data['email'])) {
